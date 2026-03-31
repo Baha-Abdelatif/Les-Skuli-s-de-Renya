@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Les Skuli's de Renya — Directions de Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Poppins:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal-profond: #1A6868;
+    --teal-principal: #2E9090;
+    --teal-doux: #B4D2D2;
+    --teal-surface: #EDF6F6;
+    --corail-cta: #C05540;
+    --corail-doux: #F2B3A0;
+    --texte-principal: #1C2C2C;
+    --texte-secondaire: #5C7070;
+    --fond-creme: #F7FAFA;
+    --blanc-pur: #FFFFFF;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #0f1f1f;
+    color: #fff;
+    min-height: 100vh;
+  }
+
+  /* ---- HEADER ---- */
+  .showcase-header {
+    padding: 48px 40px 32px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 48px;
+  }
+  .showcase-header h1 {
+    font-family: 'Libre Caslon Display', serif;
+    font-size: 36px;
+    color: var(--teal-doux);
+    margin-bottom: 8px;
+  }
+  .showcase-header p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ---- NAV TABS ---- */
+  .direction-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 0 24px 40px;
+  }
+  .dir-tab {
+    padding: 10px 20px;
+    border-radius: 24px;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .dir-tab:hover { border-color: var(--teal-doux); color: var(--teal-doux); }
+  .dir-tab.active { background: var(--teal-profond); border-color: var(--teal-profond); color: #fff; }
+
+  /* ---- DIRECTION PANEL ---- */
+  .direction-panel { display: none; padding: 0 40px 80px; }
+  .direction-panel.active { display: block; }
+
+  .direction-header {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+  .direction-header .dir-number {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal-principal);
+    margin-bottom: 8px;
+  }
+  .direction-header h2 {
+    font-family: 'Libre Caslon Display', serif;
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .direction-header p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+
+  /* ---- DEVICE WRAPPER ---- */
+  .devices-row {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .device-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .device-label {
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .phone {
+    width: 320px;
+    height: 640px;
+    border-radius: 36px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 8px rgba(255,255,255,0.06);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---- BOTTOM NAV ---- */
+  .bnav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0 14px;
+    flex-shrink: 0;
+  }
+  .bnav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 500;
+    opacity: 0.5;
+    cursor: pointer;
+  }
+  .bnav-item.active { opacity: 1; }
+  .bnav-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+  }
+
+  /* ---- STATUS BAR ---- */
+  .status-bar {
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 11px;
+    font-family: 'Inter', sans-serif;
+    flex-shrink: 0;
+  }
+
+  /* ---- SCROLL CONTENT ---- */
+  .screen-content {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* =========================================================
+     DIRECTION 1 : ÉLÉGANTE & ÉPURÉE
+  ========================================================= */
+  .d1-bg { background: var(--fond-creme); }
+  .d1-status { background: var(--fond-creme); color: var(--texte-secondaire); }
+  .d1-bnav { background: var(--blanc-pur); border-top: 1px solid #e8f0f0; }
+  .d1-bnav .bnav-item { color: var(--texte-secondaire); }
+  .d1-bnav .bnav-item.active { color: var(--teal-profond); }
+
+  .d1-hero {
+    background: var(--blanc-pur);
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid var(--teal-surface);
+  }
+  .d1-hero-greeting {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--texte-secondaire);
+    margin-bottom: 4px;
+  }
+  .d1-hero-title {
+    font-family: 'Libre Caslon Display', serif;
+    font-size: 22px;
+    color: var(--texte-principal);
+    line-height: 1.2;
+  }
+  .d1-hero-subtitle {
+    font-size: 13px;
+    color: var(--teal-profond);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .d1-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--texte-secondaire);
+    padding: 16px 20px 8px;
+  }
+
+  .d1-card {
+    margin: 0 20px 12px;
+    background: var(--blanc-pur);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(26,104,104,0.06);
+  }
+  .d1-card-img {
+    height: 80px;
+    background: linear-gradient(135deg, var(--teal-profond), var(--teal-principal));
+    position: relative;
+  }
+  .d1-card-img-text {
+    position: absolute;
+    bottom: 8px;
+    left: 12px;
+    color: rgba(255,255,255,0.7);
+    font-size: 10px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .d1-card-body { padding: 12px 14px; }
+  .d1-card-title { font-size: 14px; font-weight: 700; color: var(--texte-principal); margin-bottom: 2px; }
+  .d1-card-sub { font-size: 11px; color: var(--texte-secondaire); }
+  .d1-card-row { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+  .d1-badge {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 10px;
+    background: var(--teal-surface);
+    color: var(--teal-profond);
+  }
+  .d1-badge-coral {
+    background: var(--corail-doux);
+    color: var(--corail-cta);
+  }
+
+  .d1-continue {
+    margin: 0 20px 12px;
+    background: var(--teal-profond);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .d1-continue-icon {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .d1-continue-text { flex: 1; }
+  .d1-continue-label { font-size: 10px; color: rgba(255,255,255,0.6); font-family: 'Inter', sans-serif; }
+  .d1-continue-title { font-size: 13px; font-weight: 600; color: #fff; }
+  .d1-play-btn {
+    width: 32px; height: 32px;
+    background: var(--corail-cta);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+  }
+
+  /* =========================================================
+     DIRECTION 2 : COMMUNAUTAIRE & VIVANTE
+  ========================================================= */
+  .d2-bg { background: var(--teal-surface); }
+  .d2-status { background: var(--teal-profond); color: rgba(255,255,255,0.8); }
+  .d2-bnav { background: var(--blanc-pur); border-top: 1px solid #e0eded; }
+  .d2-bnav .bnav-item { color: var(--texte-secondaire); }
+  .d2-bnav .bnav-item.active { color: var(--teal-profond); }
+
+  .d2-header {
+    background: var(--teal-profond);
+    padding: 14px 20px 20px;
+    position: relative;
+  }
+  .d2-header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .d2-logo { font-family: 'Libre Caslon Display', serif; font-size: 16px; color: #fff; }
+  .d2-notif {
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .d2-greeting { font-size: 12px; color: rgba(255,255,255,0.65); margin-bottom: 4px; }
+  .d2-name { font-size: 20px; font-weight: 700; color: #fff; }
+
+  .d2-quick-actions {
+    display: flex;
+    gap: 10px;
+    padding: 12px 20px;
+    background: var(--blanc-pur);
+    border-bottom: 1px solid var(--teal-surface);
+  }
+  .d2-qa {
+    flex: 1;
+    background: var(--teal-surface);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+  .d2-qa-icon { font-size: 18px; margin-bottom: 4px; }
+  .d2-qa-label { font-size: 10px; font-weight: 500; color: var(--teal-profond); }
+
+  .d2-feed { padding: 12px 16px; }
+  .d2-feed-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--texte-principal);
+    margin-bottom: 10px;
+  }
+  .d2-post {
+    background: var(--blanc-pur);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(26,104,104,0.06);
+  }
+  .d2-post-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .d2-avatar {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--teal-principal);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    color: #fff;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .d2-avatar-renya { background: var(--corail-cta); }
+  .d2-post-meta { flex: 1; }
+  .d2-post-name { font-size: 12px; font-weight: 600; color: var(--texte-principal); }
+  .d2-post-time { font-size: 10px; color: var(--texte-secondaire); font-family: 'Inter', sans-serif; }
+  .d2-post-text { font-size: 12px; color: var(--texte-principal); line-height: 1.5; margin-bottom: 8px; }
+  .d2-post-actions { display: flex; gap: 12px; }
+  .d2-action { font-size: 11px; color: var(--texte-secondaire); font-family: 'Inter', sans-serif; }
+  .d2-action.liked { color: var(--corail-cta); }
+
+  .d2-fab {
+    position: absolute;
+    bottom: 72px;
+    right: 20px;
+    width: 48px; height: 48px;
+    background: var(--corail-cta);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(192,85,64,0.4);
+    z-index: 10;
+  }
+
+  /* =========================================================
+     DIRECTION 3 : SOMBRE & IMMERSIVE (Studio)
+  ========================================================= */
+  .d3-bg { background: #0d1e1e; }
+  .d3-status { background: #0d1e1e; color: rgba(255,255,255,0.5); }
+  .d3-bnav { background: #0d1e1e; border-top: 1px solid rgba(255,255,255,0.08); }
+  .d3-bnav .bnav-item { color: rgba(255,255,255,0.4); }
+  .d3-bnav .bnav-item.active { color: var(--teal-doux); }
+
+  .d3-hero {
+    height: 180px;
+    background: linear-gradient(180deg, rgba(26,104,104,0.6) 0%, #0d1e1e 100%),
+                linear-gradient(135deg, var(--teal-profond) 0%, #0d2828 100%);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .d3-hero-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--teal-doux); margin-bottom: 6px; font-family: 'Inter', sans-serif; }
+  .d3-hero-title { font-family: 'Libre Caslon Display', serif; font-size: 24px; color: #fff; line-height: 1.2; }
+
+  .d3-player {
+    margin: 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 16px;
+  }
+  .d3-player-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .d3-player-cover {
+    width: 48px; height: 48px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--teal-profond), var(--teal-principal));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .d3-player-info { flex: 1; }
+  .d3-player-title { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 2px; }
+  .d3-player-sub { font-size: 11px; color: rgba(255,255,255,0.5); font-family: 'Inter', sans-serif; }
+  .d3-player-dl { font-size: 18px; color: rgba(255,255,255,0.4); }
+
+  .d3-chips {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .d3-chip {
+    padding: 5px 12px;
+    border-radius: 16px;
+    font-size: 11px;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.5);
+    font-family: 'Inter', sans-serif;
+  }
+  .d3-chip.active {
+    background: var(--teal-profond);
+    border-color: var(--teal-profond);
+    color: #fff;
+  }
+
+  .d3-progress { margin-bottom: 12px; }
+  .d3-progress-bar {
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    margin-bottom: 6px;
+    overflow: hidden;
+  }
+  .d3-progress-fill {
+    height: 100%;
+    width: 40%;
+    background: var(--teal-doux);
+    border-radius: 2px;
+  }
+  .d3-progress-times { display: flex; justify-content: space-between; font-size: 10px; color: rgba(255,255,255,0.35); font-family: 'Inter', sans-serif; }
+
+  .d3-controls { display: flex; align-items: center; justify-content: center; gap: 20px; }
+  .d3-ctrl { font-size: 20px; color: rgba(255,255,255,0.5); }
+  .d3-play {
+    width: 48px; height: 48px;
+    background: var(--teal-profond);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+
+  .d3-lyrics-preview {
+    margin: 0 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .d3-lyrics-label { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 8px; font-family: 'Inter', sans-serif; }
+  .d3-lyrics-line { font-size: 13px; color: #fff; line-height: 1.7; }
+  .d3-lyrics-line.dim { color: rgba(255,255,255,0.3); }
+
+  /* =========================================================
+     DIRECTION 4 : TONIQUE & CORAIL
+  ========================================================= */
+  .d4-bg { background: var(--fond-creme); }
+  .d4-status { background: var(--corail-cta); color: rgba(255,255,255,0.9); }
+  .d4-bnav { background: var(--blanc-pur); border-top: 1px solid #edddd9; }
+  .d4-bnav .bnav-item { color: var(--texte-secondaire); }
+  .d4-bnav .bnav-item.active { color: var(--corail-cta); }
+
+  .d4-header {
+    background: var(--corail-cta);
+    padding: 16px 20px 24px;
+  }
+  .d4-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .d4-header-title { font-family: 'Libre Caslon Display', serif; font-size: 18px; color: #fff; }
+  .d4-avatar-sm {
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .d4-welcome { font-size: 13px; color: rgba(255,255,255,0.75); margin-bottom: 2px; }
+  .d4-name { font-size: 22px; font-weight: 700; color: #fff; }
+
+  .d4-stats {
+    display: flex;
+    gap: 0;
+    margin: -14px 16px 0;
+    background: var(--blanc-pur);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(192,85,64,0.15);
+  }
+  .d4-stat {
+    flex: 1;
+    padding: 12px 8px;
+    text-align: center;
+    border-right: 1px solid var(--fond-creme);
+  }
+  .d4-stat:last-child { border-right: none; }
+  .d4-stat-num { font-size: 18px; font-weight: 700; color: var(--texte-principal); }
+  .d4-stat-label { font-size: 10px; color: var(--texte-secondaire); font-family: 'Inter', sans-serif; }
+
+  .d4-section { padding: 16px 16px 4px; }
+  .d4-section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--texte-principal);
+    margin-bottom: 12px;
+  }
+  .d4-course-card {
+    background: var(--blanc-pur);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .d4-card-stripe {
+    width: 5px;
+    background: var(--corail-cta);
+    flex-shrink: 0;
+  }
+  .d4-card-stripe.teal { background: var(--teal-profond); }
+  .d4-card-content { padding: 12px 12px; flex: 1; }
+  .d4-card-type { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--texte-secondaire); margin-bottom: 3px; font-family: 'Inter', sans-serif; }
+  .d4-card-title { font-size: 13px; font-weight: 600; color: var(--texte-principal); margin-bottom: 4px; }
+  .d4-card-prog { height: 3px; background: var(--fond-creme); border-radius: 2px; overflow: hidden; }
+  .d4-card-prog-fill { height: 100%; background: var(--corail-cta); border-radius: 2px; }
+  .d4-card-prog-fill.teal { background: var(--teal-profond); }
+  .d4-card-right { padding: 12px 12px; display: flex; align-items: center; justify-content: center; }
+  .d4-play-sm {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--fond-creme);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+
+  /* =========================================================
+     DIRECTION 5 : MINIMALISTE & MOBILE-FIRST (Fitness Park style)
+  ========================================================= */
+  .d5-bg { background: #f2f5f5; }
+  .d5-status { background: var(--texte-principal); color: rgba(255,255,255,0.7); }
+  .d5-bnav { background: var(--texte-principal); border-top: none; }
+  .d5-bnav .bnav-item { color: rgba(255,255,255,0.4); }
+  .d5-bnav .bnav-item.active { color: #fff; }
+
+  .d5-header {
+    background: var(--texte-principal);
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .d5-header-left {}
+  .d5-header-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); font-family: 'Inter', sans-serif; }
+  .d5-header-name { font-size: 18px; font-weight: 700; color: #fff; }
+  .d5-header-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--teal-profond);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .d5-tabs {
+    display: flex;
+    background: var(--texte-principal);
+    padding: 0 20px 12px;
+    gap: 0;
+  }
+  .d5-tab {
+    flex: 1;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.4);
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+  }
+  .d5-tab.active { color: #fff; border-bottom-color: var(--teal-doux); }
+
+  .d5-content { padding: 16px; }
+
+  .d5-next-session {
+    background: var(--teal-profond);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .d5-ns-left {}
+  .d5-ns-label { font-size: 10px; color: rgba(255,255,255,0.6); letter-spacing: 1px; text-transform: uppercase; font-family: 'Inter', sans-serif; margin-bottom: 4px; }
+  .d5-ns-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 2px; }
+  .d5-ns-time { font-size: 12px; color: var(--teal-doux); font-family: 'Inter', sans-serif; }
+  .d5-ns-btn {
+    padding: 8px 16px;
+    background: var(--corail-cta);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  .d5-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .d5-grid-card {
+    background: var(--blanc-pur);
+    border-radius: 10px;
+    padding: 14px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .d5-grid-icon { font-size: 22px; margin-bottom: 8px; }
+  .d5-grid-num { font-size: 22px; font-weight: 700; color: var(--texte-principal); line-height: 1; }
+  .d5-grid-label { font-size: 11px; color: var(--texte-secondaire); font-family: 'Inter', sans-serif; margin-top: 2px; }
+
+  .d5-list-item {
+    background: var(--blanc-pur);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .d5-list-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--teal-profond);
+    flex-shrink: 0;
+  }
+  .d5-list-dot.coral { background: var(--corail-cta); }
+  .d5-list-text { flex: 1; font-size: 13px; color: var(--texte-principal); font-weight: 500; }
+  .d5-list-arrow { font-size: 14px; color: var(--texte-secondaire); }
+
+  /* =========================================================
+     DIRECTION 6 : DOUCE & SENIOR-FRIENDLY
+  ========================================================= */
+  .d6-bg { background: var(--fond-creme); }
+  .d6-status { background: var(--fond-creme); color: var(--texte-secondaire); }
+  .d6-bnav { background: var(--blanc-pur); border-top: 2px solid var(--teal-surface); }
+  .d6-bnav .bnav-item { color: var(--texte-secondaire); }
+  .d6-bnav .bnav-item.active { color: var(--teal-profond); }
+  .d6-bnav .bnav-item.active .bnav-label { font-weight: 700; }
+
+  .d6-header { background: var(--blanc-pur); padding: 16px 24px 20px; }
+  .d6-header-row { display: flex; justify-content: space-between; align-items: flex-start; }
+  .d6-header-greeting { font-size: 14px; color: var(--texte-secondaire); margin-bottom: 4px; }
+  .d6-header-name { font-family: 'Libre Caslon Display', serif; font-size: 26px; color: var(--texte-principal); }
+  .d6-header-bell {
+    width: 44px; height: 44px;
+    background: var(--teal-surface);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+
+  .d6-big-cta {
+    margin: 16px;
+    background: var(--teal-profond);
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .d6-big-cta-label { font-size: 12px; color: rgba(255,255,255,0.65); margin-bottom: 4px; font-family: 'Inter', sans-serif; }
+  .d6-big-cta-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.3; }
+  .d6-big-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--corail-cta);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 10px;
+  }
+
+  .d6-menu-list { padding: 8px 16px; }
+  .d6-menu-item {
+    background: var(--blanc-pur);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 2px 8px rgba(26,104,104,0.06);
+  }
+  .d6-menu-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .d6-menu-icon.teal { background: var(--teal-surface); }
+  .d6-menu-icon.coral { background: #fdeae5; }
+  .d6-menu-text { flex: 1; }
+  .d6-menu-title { font-size: 16px; font-weight: 600; color: var(--texte-principal); margin-bottom: 2px; }
+  .d6-menu-sub { font-size: 12px; color: var(--texte-secondaire); }
+  .d6-menu-arrow { font-size: 18px; color: var(--teal-profond); }
+
+  /* ---- UTILITY ---- */
+  .flex-row { display: flex; align-items: center; }
+  .spacer { flex: 1; }
+
+  /* ---- FOOTER INFO ---- */
+  .direction-footer {
+    max-width: 900px;
+    margin: 32px auto 0;
+    padding: 24px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .direction-footer h3 { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+  .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pros-cons ul { list-style: none; padding: 0; }
+  .pros-cons li { font-size: 13px; padding: 4px 0; color: rgba(255,255,255,0.55); }
+  .pros-cons li::before { margin-right: 6px; }
+  .pros li::before { content: "✓"; color: var(--teal-doux); }
+  .cons li::before { content: "→"; color: var(--corail-doux); }
+  .pros-title { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--teal-doux); margin-bottom: 8px; }
+  .cons-title { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--corail-doux); margin-bottom: 8px; }
+
+</style>
+</head>
+<body>
+
+<div class="showcase-header">
+  <div style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--teal-principal);margin-bottom:12px;">Les Skuli's de Renya</div>
+  <h1>6 Directions de Design</h1>
+  <p>Explore chaque direction, note ce qui résonne. Tu peux mélanger des éléments de plusieurs directions.</p>
+</div>
+
+<div class="direction-nav">
+  <button class="dir-tab active" onclick="showDir(1, this)">1 · Élégante & Épurée</button>
+  <button class="dir-tab" onclick="showDir(2, this)">2 · Communautaire</button>
+  <button class="dir-tab" onclick="showDir(3, this)">3 · Studio Sombre</button>
+  <button class="dir-tab" onclick="showDir(4, this)">4 · Tonique & Corail</button>
+  <button class="dir-tab" onclick="showDir(5, this)">5 · Minimaliste</button>
+  <button class="dir-tab" onclick="showDir(6, this)">6 · Douce & Lisible</button>
+</div>
+
+<!-- ======================== DIRECTION 1 ======================== -->
+<div class="direction-panel active" id="dir-1">
+  <div class="direction-header">
+    <div class="dir-number">Direction 01</div>
+    <h2>Élégante & Épurée</h2>
+    <p>Fond crème dominant, Libre Caslon en vedette sur les titres, beaucoup d'espace blanc. L'app respire. Identité proche d'un studio de bien-être haut de gamme. La couleur arrive en accents précis.</p>
+  </div>
+  <div class="devices-row">
+    <!-- ACCUEIL -->
+    <div class="device-wrap">
+      <div class="device-label">Accueil</div>
+      <div class="phone">
+        <div class="phone-screen d1-bg">
+          <div class="status-bar d1-status"><span>9:41</span><span>●●●</span></div>
+          <div class="screen-content">
+            <div class="d1-hero">
+              <div class="d1-hero-greeting">Bonjour, Marie 👋</div>
+              <div class="d1-hero-title">Les Skuli's<br>de Renya</div>
+              <div class="d1-hero-subtitle">Continuer votre parcours</div>
+            </div>
+            <div class="d1-continue">
+              <div class="d1-continue-icon">🎵</div>
+              <div class="d1-continue-text">
+                <div class="d1-continue-label">RÉPERTOIRE · ALTO</div>
+                <div class="d1-continue-title">Amazing Grace — Alto</div>
+              </div>
+              <div class="d1-play-btn">▶</div>
+            </div>
+            <div class="d1-section-title">Mes cours</div>
+            <div class="d1-card">
+              <div class="d1-card-img">
+                <div class="d1-card-img-text">Gospel Vibrations</div>
+              </div>
+              <div class="d1-card-body">
+                <div class="d1-card-title">Atelier Choral</div>
+                <div class="d1-card-sub">Mercredi 20h — Roubaix</div>
+                <div class="d1-card-row">
+                  <div class="d1-badge">Inscrit · S4</div>
+                  <div style="font-size:11px;color:var(--texte-secondaire);font-family:'Inter',sans-serif;">3 morceaux</div>
+                </div>
+              </div>
+            </div>
+            <div class="d1-card">
+              <div class="d1-card-img" style="background: linear-gradient(135deg, var(--corail-cta), var(--corail-doux));">
+                <div class="d1-card-img-text">Programmes en ligne</div>
+              </div>
+              <div class="d1-card-body">
+                <div class="d1-card-title">Abonnement Annuel</div>
+                <div class="d1-card-sub">Accès illimité au répertoire</div>
+                <div class="d1-card-row">
+                  <div class="d1-badge d1-badge-coral">Actif · 8 mois restants</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bnav d1-bnav">
+            <div class="bnav-item active"><div style="font-size:18px;">⌂</div><span class="bnav-label" style="font-size:10px;">Accueil</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">📚</div><span class="bnav-label" style="font-size:10px;">Cours</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">🎵</div><span class="bnav-label" style="font-size:10px;">Répertoire</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">💬</div><span class="bnav-label" style="font-size:10px;">Communauté</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">👤</div><span class="bnav-label" style="font-size:10px;">Profil</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- LECTEUR -->
+    <div class="device-wrap">
+      <div class="device-label">Lecteur</div>
+      <div class="phone">
+        <div class="phone-screen d1-bg">
+          <div class="status-bar d1-status"><span>9:41</span><span>●●●</span></div>
+          <div class="screen-content">
+            <div style="background:var(--blanc-pur);padding:14px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--teal-surface);">
+              <div style="font-size:18px;color:var(--texte-secondaire);">‹</div>
+              <div style="flex:1;">
+                <div style="font-size:11px;color:var(--texte-secondaire);font-family:'Inter',sans-serif;letter-spacing:1px;">RÉPERTOIRE</div>
+                <div style="font-size:15px;font-weight:700;color:var(--texte-principal);">Amazing Grace</div>
+              </div>
+              <div style="font-size:18px;color:var(--texte-secondaire);">⤓</div>
+            </div>
+            <!-- Pochette -->
+            <div style="height:160px;background:linear-gradient(135deg,var(--teal-profond),var(--teal-principal));display:flex;align-items:center;justify-content:center;font-size:60px;">🎼</div>
+            <!-- Chips tessiture -->
+            <div style="padding:14px 20px;">
+              <div style="font-size:11px;font-family:'Inter',sans-serif;color:var(--texte-secondaire);letter-spacing:1px;margin-bottom:8px;">CHOISIR MA VOIX</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <div style="padding:7px 14px;border-radius:20px;background:var(--teal-surface);color:var(--texte-secondaire);font-size:12px;font-weight:500;">Toutes</div>
+                <div style="padding:7px 14px;border-radius:20px;background:var(--teal-profond);color:#fff;font-size:12px;font-weight:500;">Alto ✓</div>
+                <div style="padding:7px 14px;border-radius:20px;background:var(--teal-surface);color:var(--texte-secondaire);font-size:12px;font-weight:500;">Soprano</div>
+                <div style="padding:7px 14px;border-radius:20px;background:var(--teal-surface);color:var(--texte-secondaire);font-size:12px;font-weight:500;">Ténor</div>
+                <div style="padding:7px 14px;border-radius:20px;background:var(--teal-surface);color:var(--texte-secondaire);font-size:12px;font-weight:500;">Basse</div>
+              </div>
+            </div>
+            <!-- Progression -->
+            <div style="padding:0 20px 12px;">
+              <div style="height:3px;background:var(--teal-surface);border-radius:2px;margin-bottom:6px;overflow:hidden;"><div style="width:35%;height:100%;background:var(--teal-profond);border-radius:2px;"></div></div>
+              <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--texte-secondaire);font-family:'Inter',sans-serif;"><span>1:24</span><span>3:52</span></div>
+            </div>
+            <!-- Contrôles -->
+            <div style="display:flex;align-items:center;justify-content:center;gap:24px;padding:4px 20px;">
+              <div style="font-size:22px;color:var(--texte-secondaire);">⟨⟨</div>
+              <div style="width:52px;height:52px;background:var(--teal-profond);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;">⏸</div>
+              <div style="font-size:22px;color:var(--texte-secondaire);">⟩⟩</div>
+            </div>
+            <!-- Paroles -->
+            <div style="margin:12px 16px 0;background:var(--blanc-pur);border-radius:12px;padding:12px 14px;border:1px solid var(--teal-surface);">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <div style="font-size:11px;font-weight:600;color:var(--texte-secondaire);letter-spacing:1px;">PAROLES</div>
+                <div style="font-size:11px;color:var(--teal-profond);font-weight:500;">PDF ↗</div>
+              </div>
+              <div style="font-size:13px;color:var(--texte-principal);line-height:1.7;">Amazing grace, how sweet the sound</div>
+              <div style="font-size:13px;color:var(--texte-secondaire);line-height:1.7;">That saved a wretch like me...</div>
+            </div>
+          </div>
+          <div class="bnav d1-bnav">
+            <div class="bnav-item"><div style="font-size:18px;">⌂</div><span class="bnav-label" style="font-size:10px;">Accueil</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">📚</div><span class="bnav-label" style="font-size:10px;">Cours</span></div>
+            <div class="bnav-item active"><div style="font-size:18px;">🎵</div><span class="bnav-label" style="font-size:10px;">Répertoire</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">💬</div><span class="bnav-label" style="font-size:10px;">Communauté</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">👤</div><span class="bnav-label" style="font-size:10px;">Profil</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="direction-footer">
+    <h3>Analyse de la direction</h3>
+    <div class="pros-cons">
+      <div>
+        <div class="pros-title">Points forts</div>
+        <ul class="pros">
+          <li>Sophistiquée, marque premium</li>
+          <li>Très lisible pour tous les âges</li>
+          <li>Fond crème reposant pour la lecture longue</li>
+          <li>Libre Caslon Display mis en valeur</li>
+        </ul>
+      </div>
+      <div>
+        <div class="cons-title">Points d'attention</div>
+        <ul class="cons">
+          <li>Peut sembler peu énergique</li>
+          <li>La communauté doit être bien mise en avant</li>
+          <li>Nécessite de bonnes photos pour vivre</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== DIRECTION 2 ======================== -->
+<div class="direction-panel" id="dir-2">
+  <div class="direction-header">
+    <div class="dir-number">Direction 02</div>
+    <h2>Communautaire & Vivante</h2>
+    <p>Header Teal Profond, fil d'activité en position centrale. L'app communique d'abord qu'on n'est pas seul. Le répertoire et les cours sont à portée, mais c'est la vie du groupe qui domine l'accueil.</p>
+  </div>
+  <div class="devices-row">
+    <div class="device-wrap">
+      <div class="device-label">Accueil</div>
+      <div class="phone">
+        <div class="phone-screen d2-bg" style="position:relative;">
+          <div class="status-bar d2-status"><span>9:41</span><span>●●●</span></div>
+          <div class="screen-content">
+            <div class="d2-header">
+              <div class="d2-header-top">
+                <div class="d2-logo">Les Skuli's de Renya</div>
+                <div class="d2-notif">🔔</div>
+              </div>
+              <div class="d2-greeting">Bonjour,</div>
+              <div class="d2-name">Marie 👋</div>
+            </div>
+            <div class="d2-quick-actions">
+              <div class="d2-qa"><div class="d2-qa-icon">🎵</div><div class="d2-qa-label">Répertoire</div></div>
+              <div class="d2-qa"><div class="d2-qa-icon">📅</div><div class="d2-qa-label">Calendrier</div></div>
+              <div class="d2-qa"><div class="d2-qa-icon">📚</div><div class="d2-qa-label">Mes cours</div></div>
+            </div>
+            <div class="d2-feed">
+              <div class="d2-feed-title">Fil de la communauté</div>
+              <div class="d2-post">
+                <div class="d2-post-header">
+                  <div class="d2-avatar d2-avatar-renya">R</div>
+                  <div class="d2-post-meta">
+                    <div class="d2-post-name">Renya Ketoglo</div>
+                    <div class="d2-post-time">Il y a 2h · Gospel Vibrations</div>
+                  </div>
+                </div>
+                <div class="d2-post-text">Nouveau morceau disponible ! Travaillez votre pupitre avant mercredi 🎶</div>
+                <div style="background:var(--teal-surface);border-radius:8px;padding:8px 10px;margin-bottom:8px;font-size:12px;color:var(--teal-profond);font-weight:500;">▶ Écouter — Oh Happy Day</div>
+                <div class="d2-post-actions">
+                  <div class="d2-action liked">♥ 12</div>
+                  <div class="d2-action">💬 3</div>
+                </div>
+              </div>
+              <div class="d2-post">
+                <div class="d2-post-header">
+                  <div class="d2-avatar">A</div>
+                  <div class="d2-post-meta">
+                    <div class="d2-post-name">Anne-Sophie</div>
+                    <div class="d2-post-time">Il y a 5h · Général</div>
+                  </div>
+                </div>
+                <div class="d2-post-text">La séance d'hier était incroyable. Merci Renya !</div>
+                <div class="d2-post-actions">
+                  <div class="d2-action liked">♥ 8</div>
+                  <div class="d2-action">💬 1</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d2-fab">+</div>
+          <div class="bnav d2-bnav">
+            <div class="bnav-item active"><div style="font-size:18px;">⌂</div><span class="bnav-label" style="font-size:10px;">Accueil</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">📚</div><span class="bnav-label" style="font-size:10px;">Cours</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">🎵</div><span class="bnav-label" style="font-size:10px;">Répertoire</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">💬</div><span class="bnav-label" style="font-size:10px;">Communauté</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">👤</div><span class="bnav-label" style="font-size:10px;">Profil</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="direction-footer">
+    <h3>Analyse de la direction</h3>
+    <div class="pros-cons">
+      <div>
+        <div class="pros-title">Points forts</div>
+        <ul class="pros">
+          <li>Sentiment d'appartenance immédiat</li>
+          <li>L'app est vivante dès J+0</li>
+          <li>Header Teal fort, identité marquée</li>
+          <li>Actions rapides très accessibles</li>
+        </ul>
+      </div>
+      <div>
+        <div class="cons-title">Points d'attention</div>
+        <ul class="cons">
+          <li>Le cours devient secondaire visuellement</li>
+          <li>Risque si la communauté est peu active</li>
+          <li>Le lecteur doit se démarquer clairement</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== DIRECTION 3 ======================== -->
+<div class="direction-panel" id="dir-3">
+  <div class="direction-header">
+    <div class="dir-number">Direction 03</div>
+    <h2>Studio Sombre & Immersive</h2>
+    <p>Fond très sombre (#0d1e1e), textures subtiles, le lecteur est la star de l'app. Feeling studio d'enregistrement, concentration maximale. Identité musicale affirmée.</p>
+  </div>
+  <div class="devices-row">
+    <div class="device-wrap">
+      <div class="device-label">Lecteur</div>
+      <div class="phone">
+        <div class="phone-screen d3-bg">
+          <div class="status-bar d3-status"><span>9:41</span><span>●●●</span></div>
+          <div class="screen-content">
+            <div class="d3-hero">
+              <div class="d3-hero-tag">Répertoire · Alto</div>
+              <div class="d3-hero-title">Amazing<br>Grace</div>
+            </div>
+            <div class="d3-player">
+              <div class="d3-player-top">
+                <div class="d3-player-cover">🎼</div>
+                <div class="d3-player-info">
+                  <div class="d3-player-title">Amazing Grace</div>
+                  <div class="d3-player-sub">Gospel · Piste Alto</div>
+                </div>
+                <div class="d3-player-dl">⤓</div>
+              </div>
+              <div class="d3-chips">
+                <div class="d3-chip">Toutes</div>
+                <div class="d3-chip active">Alto</div>
+                <div class="d3-chip">Soprano</div>
+                <div class="d3-chip">Ténor</div>
+                <div class="d3-chip">Basse</div>
+              </div>
+              <div class="d3-progress">
+                <div class="d3-progress-bar"><div class="d3-progress-fill"></div></div>
+                <div class="d3-progress-times"><span>1:24</span><span>3:52</span></div>
+              </div>
+              <div class="d3-controls">
+                <div class="d3-ctrl">⟨⟨</div>
+                <div class="d3-play">⏸</div>
+                <div class="d3-ctrl">⟩⟩</div>
+              </div>
+            </div>
+            <div class="d3-lyrics-preview">
+              <div class="d3-lyrics-label">Paroles</div>
+              <div class="d3-lyrics-line">Amazing grace, how sweet the sound</div>
+              <div class="d3-lyrics-line dim">That saved a wretch like me</div>
+              <div class="d3-lyrics-line dim">I once was lost, but now I'm found</div>
+            </div>
+          </div>
+          <div class="bnav d3-bnav">
+            <div class="bnav-item"><div style="font-size:18px;">⌂</div><span class="bnav-label" style="font-size:10px;">Accueil</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">📚</div><span class="bnav-label" style="font-size:10px;">Cours</span></div>
+            <div class="bnav-item active"><div style="font-size:18px;">🎵</div><span class="bnav-label" style="font-size:10px;">Répertoire</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">💬</div><span class="bnav-label" style="font-size:10px;">Communauté</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">👤</div><span class="bnav-label" style="font-size:10px;">Profil</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="direction-footer">
+    <h3>Analyse de la direction</h3>
+    <div class="pros-cons">
+      <div>
+        <div class="pros-title">Points forts</div>
+        <ul class="pros">
+          <li>Lecteur immersif, très concentré</li>
+          <li>Identité musicale forte et distinctive</li>
+          <li>Chips tessiture très visibles sur fond sombre</li>
+          <li>Contraste excellent pour les paroles</li>
+        </ul>
+      </div>
+      <div>
+        <div class="cons-title">Points d'attention</div>
+        <ul class="cons">
+          <li>Public senior peut trouver le fond sombre fatiguant</li>
+          <li>Moins chaleureux que la promesse "chez soi"</li>
+          <li>Éléments communautaires moins naturels sur fond sombre</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== DIRECTION 4 ======================== -->
+<div class="direction-panel" id="dir-4">
+  <div class="direction-header">
+    <div class="dir-number">Direction 04</div>
+    <h2>Tonique & Corail</h2>
+    <p>Le Corail CTA sort de son rôle d'accentuation pour prendre le header. Plus énergique, plus dynamique. Le Teal reste dans les contenus. Convient à une marque qui veut affirmer son caractère.</p>
+  </div>
+  <div class="devices-row">
+    <div class="device-wrap">
+      <div class="device-label">Accueil</div>
+      <div class="phone">
+        <div class="phone-screen d4-bg">
+          <div class="status-bar d4-status"><span>9:41</span><span>●●●</span></div>
+          <div class="screen-content">
+            <div class="d4-header">
+              <div class="d4-header-row">
+                <div>
+                  <div class="d4-welcome">Bonjour,</div>
+                  <div class="d4-name">Marie</div>
+                </div>
+                <div class="d4-avatar-sm">👤</div>
+              </div>
+            </div>
+            <div class="d4-stats">
+              <div class="d4-stat"><div class="d4-stat-num">3</div><div class="d4-stat-label">cours actifs</div></div>
+              <div class="d4-stat"><div class="d4-stat-num">12</div><div class="d4-stat-label">morceaux</div></div>
+              <div class="d4-stat"><div class="d4-stat-num">47</div><div class="d4-stat-label">membres</div></div>
+            </div>
+            <div class="d4-section">
+              <div class="d4-section-title">Continuer</div>
+              <div class="d4-course-card">
+                <div class="d4-card-stripe"></div>
+                <div class="d4-card-content">
+                  <div class="d4-card-type">Gospel Vibrations</div>
+                  <div class="d4-card-title">Oh Happy Day — Alto</div>
+                  <div class="d4-card-prog"><div class="d4-card-prog-fill" style="width:45%;"></div></div>
+                </div>
+                <div class="d4-card-right">
+                  <div class="d4-play-sm">▶</div>
+                </div>
+              </div>
+              <div class="d4-section-title" style="padding-top:8px;">Mes cours</div>
+              <div class="d4-course-card">
+                <div class="d4-card-stripe teal"></div>
+                <div class="d4-card-content">
+                  <div class="d4-card-type">Atelier Choral</div>
+                  <div class="d4-card-title">Gospel Vibrations</div>
+                  <div class="d4-card-prog"><div class="d4-card-prog-fill teal" style="width:60%;"></div></div>
+                </div>
+                <div class="d4-card-right">
+                  <div class="d4-play-sm">›</div>
+                </div>
+              </div>
+              <div class="d4-course-card">
+                <div class="d4-card-stripe" style="background:var(--teal-doux);"></div>
+                <div class="d4-card-content">
+                  <div class="d4-card-type">Programmes en ligne</div>
+                  <div class="d4-card-title">Abonnement Annuel</div>
+                  <div class="d4-card-prog"><div class="d4-card-prog-fill" style="width:30%;background:var(--teal-doux);"></div></div>
+                </div>
+                <div class="d4-card-right">
+                  <div class="d4-play-sm">›</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bnav d4-bnav">
+            <div class="bnav-item active"><div style="font-size:18px;">⌂</div><span class="bnav-label" style="font-size:10px;">Accueil</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">📚</div><span class="bnav-label" style="font-size:10px;">Cours</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">🎵</div><span class="bnav-label" style="font-size:10px;">Répertoire</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">💬</div><span class="bnav-label" style="font-size:10px;">Communauté</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">👤</div><span class="bnav-label" style="font-size:10px;">Profil</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="direction-footer">
+    <h3>Analyse de la direction</h3>
+    <div class="pros-cons">
+      <div>
+        <div class="pros-title">Points forts</div>
+        <ul class="pros">
+          <li>Très énergique, différente des apps de cours classiques</li>
+          <li>Les stats créent un sentiment de progression immédiat</li>
+          <li>Barres de progression très motivantes (style Udemy)</li>
+          <li>Header Corail mémorable et distinctif</li>
+        </ul>
+      </div>
+      <div>
+        <div class="cons-title">Points d'attention</div>
+        <ul class="cons">
+          <li>Corail en header : fort, doit être assumé</li>
+          <li>Stats peuvent être intimidantes pour les débutants</li>
+          <li>Moins proche de l'univers "bien-être vocal"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== DIRECTION 5 ======================== -->
+<div class="direction-panel" id="dir-5">
+  <div class="direction-header">
+    <div class="dir-number">Direction 05</div>
+    <h2>Minimaliste & Mobile-First</h2>
+    <p>Directement inspirée de Fitness Park : header sombre, tabs de contenu, grille de stats, liste d'actions claire. Ultra-fonctionnelle, dense mais jamais surchargée. Aucun élément superflu.</p>
+  </div>
+  <div class="devices-row">
+    <div class="device-wrap">
+      <div class="device-label">Accueil</div>
+      <div class="phone">
+        <div class="phone-screen d5-bg">
+          <div class="status-bar d5-status"><span>9:41</span><span>●●●</span></div>
+          <div class="screen-content">
+            <div class="d5-header">
+              <div class="d5-header-left">
+                <div class="d5-header-tag">Bonjour</div>
+                <div class="d5-header-name">Marie</div>
+              </div>
+              <div class="d5-header-avatar">M</div>
+            </div>
+            <div class="d5-tabs">
+              <div class="d5-tab active">Mes cours</div>
+              <div class="d5-tab">Répertoire</div>
+              <div class="d5-tab">Communauté</div>
+            </div>
+            <div class="d5-content">
+              <div class="d5-next-session">
+                <div class="d5-ns-left">
+                  <div class="d5-ns-label">Prochain atelier</div>
+                  <div class="d5-ns-title">Gospel Vibrations</div>
+                  <div class="d5-ns-time">Mer. 4 juin · 20h00</div>
+                </div>
+                <div class="d5-ns-btn">S'inscrire</div>
+              </div>
+              <div class="d5-grid">
+                <div class="d5-grid-card"><div class="d5-grid-icon">🎵</div><div class="d5-grid-num">12</div><div class="d5-grid-label">Morceaux</div></div>
+                <div class="d5-grid-card"><div class="d5-grid-icon">📅</div><div class="d5-grid-num">3</div><div class="d5-grid-label">Cours actifs</div></div>
+              </div>
+              <div class="d5-list-item">
+                <div class="d5-list-dot"></div>
+                <div class="d5-list-text">Amazing Grace — Alto</div>
+                <div class="d5-list-arrow">›</div>
+              </div>
+              <div class="d5-list-item">
+                <div class="d5-list-dot coral"></div>
+                <div class="d5-list-text">Oh Happy Day — Toutes voix</div>
+                <div class="d5-list-arrow">›</div>
+              </div>
+              <div class="d5-list-item">
+                <div class="d5-list-dot"></div>
+                <div class="d5-list-text">Go Down Moses — Alto</div>
+                <div class="d5-list-arrow">›</div>
+              </div>
+            </div>
+          </div>
+          <div class="bnav d5-bnav">
+            <div class="bnav-item active"><div style="font-size:18px;">⌂</div><span class="bnav-label" style="font-size:10px;">Accueil</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">📚</div><span class="bnav-label" style="font-size:10px;">Cours</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">🎵</div><span class="bnav-label" style="font-size:10px;">Répertoire</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">💬</div><span class="bnav-label" style="font-size:10px;">Communauté</span></div>
+            <div class="bnav-item"><div style="font-size:18px;">👤</div><span class="bnav-label" style="font-size:10px;">Profil</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="direction-footer">
+    <h3>Analyse de la direction</h3>
+    <div class="pros-cons">
+      <div>
+        <div class="pros-title">Points forts</div>
+        <ul class="pros">
+          <li>Très efficace, accès rapide à tout</li>
+          <li>Les tabs de contenu sont très intuitifs</li>
+          <li>Proche de Fitness Park, référence connue</li>
+          <li>Dense sans être chargé</li>
+        </ul>
+      </div>
+      <div>
+        <div class="cons-title">Points d'attention</div>
+        <ul class="cons">
+          <li>Moins de place pour l'identité visuelle de Renya</li>
+          <li>Risque d'être trop "app sportive" et moins "espace vocal"</li>
+          <li>Senior : les tabs de contenu peuvent être confus</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== DIRECTION 6 ======================== -->
+<div class="direction-panel" id="dir-6">
+  <div class="direction-header">
+    <div class="dir-number">Direction 06</div>
+    <h2>Douce & Senior-Friendly</h2>
+    <p>Grande typographie, espacement très généreux, boutons larges et clairs. Navigation ultra-simple par grandes cartes-menu. Pensée pour le public 50-65+ mais utilisable et agréable pour tous.</p>
+  </div>
+  <div class="devices-row">
+    <div class="device-wrap">
+      <div class="device-label">Accueil</div>
+      <div class="phone">
+        <div class="phone-screen d6-bg">
+          <div class="status-bar d6-status"><span>9:41</span><span>●●●</span></div>
+          <div class="screen-content">
+            <div class="d6-header">
+              <div class="d6-header-row">
+                <div>
+                  <div class="d6-header-greeting">Bonjour,</div>
+                  <div class="d6-header-name">Marie</div>
+                </div>
+                <div class="d6-header-bell">🔔</div>
+              </div>
+            </div>
+            <div class="d6-big-cta">
+              <div class="d6-big-cta-label">CONTINUER</div>
+              <div class="d6-big-cta-title">Amazing Grace<br>Piste Alto</div>
+              <div class="d6-big-cta-btn">▶ Écouter</div>
+            </div>
+            <div class="d6-menu-list">
+              <div class="d6-menu-item">
+                <div class="d6-menu-icon teal">🎵</div>
+                <div class="d6-menu-text">
+                  <div class="d6-menu-title">Mon répertoire</div>
+                  <div class="d6-menu-sub">12 morceaux disponibles</div>
+                </div>
+                <div class="d6-menu-arrow">›</div>
+              </div>
+              <div class="d6-menu-item">
+                <div class="d6-menu-icon teal">📚</div>
+                <div class="d6-menu-text">
+                  <div class="d6-menu-title">Mes cours</div>
+                  <div class="d6-menu-sub">Gospel Vibrations · Programme en ligne</div>
+                </div>
+                <div class="d6-menu-arrow">›</div>
+              </div>
+              <div class="d6-menu-item">
+                <div class="d6-menu-icon coral">💬</div>
+                <div class="d6-menu-text">
+                  <div class="d6-menu-title">Communauté</div>
+                  <div class="d6-menu-sub">3 nouveaux messages</div>
+                </div>
+                <div class="d6-menu-arrow">›</div>
+              </div>
+              <div class="d6-menu-item">
+                <div class="d6-menu-icon coral">📅</div>
+                <div class="d6-menu-text">
+                  <div class="d6-menu-title">Calendrier</div>
+                  <div class="d6-menu-sub">Prochain atelier : Mer. 4 juin</div>
+                </div>
+                <div class="d6-menu-arrow">›</div>
+              </div>
+            </div>
+          </div>
+          <div class="bnav d6-bnav">
+            <div class="bnav-item active"><div style="font-size:20px;">⌂</div><span class="bnav-label" style="font-size:11px;font-weight:600;">Accueil</span></div>
+            <div class="bnav-item"><div style="font-size:20px;">📚</div><span class="bnav-label" style="font-size:11px;">Cours</span></div>
+            <div class="bnav-item"><div style="font-size:20px;">🎵</div><span class="bnav-label" style="font-size:11px;">Répertoire</span></div>
+            <div class="bnav-item"><div style="font-size:20px;">💬</div><span class="bnav-label" style="font-size:11px;">Communauté</span></div>
+            <div class="bnav-item"><div style="font-size:20px;">👤</div><span class="bnav-label" style="font-size:11px;">Profil</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="direction-footer">
+    <h3>Analyse de la direction</h3>
+    <div class="pros-cons">
+      <div>
+        <div class="pros-title">Points forts</div>
+        <ul class="pros">
+          <li>Maximum d'accessibilité pour le public senior</li>
+          <li>Navigation par grandes cartes, jamais d'ambiguité</li>
+          <li>Le CTA "Continuer" est immédiatement visible</li>
+          <li>Très rassurant pour les utilisateurs peu technophiles</li>
+        </ul>
+      </div>
+      <div>
+        <div class="cons-title">Points d'attention</div>
+        <ul class="cons">
+          <li>Peut sembler trop simple pour les 25-40 ans</li>
+          <li>Navigation par liste moins fluide qu'une bottom nav</li>
+          <li>Moins d'espace pour le contenu communautaire</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer choix -->
+<div style="text-align:center;padding:40px 24px 60px;border-top:1px solid rgba(255,255,255,0.08);margin-top:40px;">
+  <p style="font-family:'Libre Caslon Display',serif;font-size:22px;color:var(--teal-doux);margin-bottom:8px;">Quelle direction te parle ?</p>
+  <p style="font-size:14px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;">Tu peux choisir une direction ou combiner des éléments de plusieurs.</p>
+</div>
+
+<script>
+function showDir(n, btn) {
+  document.querySelectorAll('.direction-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.dir-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('dir-' + n).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
